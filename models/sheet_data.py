@@ -1,7 +1,7 @@
 class SheetData:
     def __init__(self, row: list):
-        if len(row) < 8:
-            row += [''] * (8 - len(row))
+        if len(row) < 9:
+            row += [''] * (9 - len(row))
 
         self.data = row[0]
         self.tarefa = row[1]
@@ -15,6 +15,7 @@ class SheetData:
 
     def __repr__(self):
         return (f"Data: {self.data}\n"
+                f"Codico Tarefa Task: {self.tarefa}\n"
                 f"Descrição: {self.descricao}\n"
                 f"Hora Início: {self.hora_inicio}\n"
                 f"Hora Fim: {self.hora_fim}\n"
