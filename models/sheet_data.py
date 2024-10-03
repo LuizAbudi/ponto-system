@@ -4,13 +4,14 @@ class SheetData:
             row += [''] * (8 - len(row))
 
         self.data = row[0]
-        self.descricao = row[1]
-        self.hora_inicio = row[2]
-        self.hora_fim = row[3]
-        self.total_horas = row[4]
-        self.apontado = row[5]
-        self.hora_inicio_formatada = row[6]
-        self.hora_fim_formatada = row[7]
+        self.tarefa = row[1]
+        self.descricao = row[2]
+        self.hora_inicio = row[3]
+        self.hora_fim = row[4]
+        self.total_horas = row[5]
+        self.apontado = row[6]
+        self.hora_inicio_formatada = row[7]
+        self.hora_fim_formatada = row[8]
 
     def __repr__(self):
         return (f"Data: {self.data}\n"

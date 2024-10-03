@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 import time
+import sys
 
 class SiteInteraction:
     def __init__(self):
@@ -22,12 +23,27 @@ class SiteInteraction:
             print(f"Error starting Chrome: {e}")
             self.driver = None
 
+        if self.driver is None:
+            print("Driver não está disponível. Não será possível interagir com o site.")
+            sys.exit(1)
+
     def access_site(self, url):
         if self.driver:
             self.driver.get(url)
             time.sleep(2)
         else:
             print("Driver não está disponível. Não foi possível acessar o site.")
+            
+    def select_task(self, task):
+        if self.driver:
+            try:
+                task_element = self.driver.find_element(By.XPATH, f"//div[contains(text(), '{task}')]")
+                task_element.click()
+                time.sleep(1)
+            except Exception as e:
+                print(f"Error selecting task: {task}, {e}")
+        else:
+            print("Driver não está disponível. Não foi possível selecionar a tarefa.")
 
     def click_button(self, selector):
         if self.driver:
@@ -78,6 +94,7 @@ class SiteInteraction:
     def process_entries(self, entries):
         print(entries)
         # for entry in entries:
+        #     self.select_task(entry['descricao'])
         #     self.click_button("button[data-toggle='modal'][data-target='#modalExecucoes']")
             
         #     self.click_button("button[ng-click='incluirExecucao(ordemServicoEdicao)']")
