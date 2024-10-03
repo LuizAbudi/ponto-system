@@ -64,21 +64,6 @@ class SiteInteraction:
 
         time.sleep(5)
 
-    def select_task(self, task):
-        if self.driver:
-            try:
-                task_element = WebDriverWait(self.driver, 10).until(
-                    EC.presence_of_element_located(
-                        (By.XPATH, f"//th[contains(text(), '{task}')]"))
-                )
-                task_element.click()
-                time.sleep(1)
-                print(f"Tarefa selecionada: {task}")
-            except Exception as e:
-                print(f"Erro ao selecionar a tarefa: {task}. {e}")
-        else:
-            print("Driver não está disponível. Não foi possível selecionar a tarefa.")
-
     def click_button(self, selector):
         if self.driver:
             try:
@@ -136,15 +121,34 @@ class SiteInteraction:
             print("Driver não está disponível. Não foi possível esperar pela mensagem.")
             return None
 
+    def select_task(self, task):
+        if self.driver:
+            try:
+                task_element = WebDriverWait(self.driver, 10).until(
+                    EC.presence_of_element_located(
+                        (By.XPATH, f"//th[normalize-space(text())='{task}']"))
+                )
+
+                task_row = task_element.find_element(
+                    By.XPATH, './ancestor::tr')
+
+                button = task_row.find_element(
+                    By.XPATH, ".//button[@data-toggle='modal'][@data-target='#modalExecucoes']")
+
+                button.click()
+
+                print(f"Tarefa selecionada: {task}")
+                print("Botão de execuções clicado.")
+            except Exception as e:
+                print(f"Erro ao selecionar a tarefa: {task}. {e}")
+        else:
+            print("Driver não está disponível. Não foi possível selecionar a tarefa.")
+
     def process_entries(self, entries):
         for entry in entries:
             print(f"Iniciando processamento da entrada: {entry}")
             try:
                 self.select_task(entry['task'])
-
-                self.click_button(
-                    "button[data-toggle='modal'][data-target='#modalExecucoes']")
-                print("Botão de execuções clicado.")
 
                 self.click_button(
                     "button[ng-click='incluirExecucao(ordemServicoEdicao)']")
@@ -160,9 +164,11 @@ class SiteInteraction:
 
                 self.click_button(
                     "button[ng-click='salvarExecucao(ordemServicoEdicao)']")
+                print("Execução salva.")
 
                 self.click_button(
                     "button[ng-click='fecharExecucao(execucao)']")
+                print("Execução fechada.")
 
                 success_message = self.wait_for_message(
                     "Execução Salva com Sucesso!")
@@ -173,6 +179,8 @@ class SiteInteraction:
 
             except Exception as e:
                 print(f"Erro ao processar entrada: {entry}. {e}")
+
+            print('--------------------------------------')
 
     def close(self):
         if self.driver:
