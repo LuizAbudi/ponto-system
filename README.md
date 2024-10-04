@@ -3,6 +3,7 @@
 Este projeto implementa a automação de apontamento de horas. O projeto foi desenvolvido em Python e utiliza de uma integração com o Google Sheets para obter as informações das horas trabalhadas. Foi utilizado o framework `Selenium` para a automação do navegador e a biblioteca `google-api-python-client` para a integração com o Google Sheets.
 
 ## Documentação
+- [Python](https://docs.python.org/pt-br/3/)
 - [Documentação Google](https://developers.google.com/sheets/api/quickstart/python?hl=pt-br)
 - [Selenium](https://www.selenium.dev/pt-br/documentation/)
 
@@ -22,7 +23,7 @@ Para executar o projeto, clone o repositório, pelo terminal, entre na pasta do 
 pip install -r requirements.txt
 ```
 
-Crie o arquivo `.env` na raiz do projeto e adicione as seguintes variáveis de ambiente:
+**Crie o arquivo `.env` na raiz do projeto e adicione as seguintes variáveis de ambiente:**
 
 ```bash
 GOOGLE_SPREADSHEET_ID="id_da_planilha"
@@ -36,9 +37,12 @@ TASK_PASSWORD="senha_do_sistema_de_tarefas"
 - O Id da planilha pode ser obtido na URL da planilha do Google Sheets:
   - docs.google.com/spreadsheets/d/`id_da_planilha`/edit#gid=0
 
+**Obtendo as credenciais para acesso à planilha**
+
 - Obter o arquivo `credentials.json` na [página de credenciais do Google](https://console.developers.google.com/apis/credentials). 
   - Clique em `Api e Serviços` -> `Credenciais` -> `Criar Credenciais` -> `Conta de serviço` -> `Colocar o nome da conta do serviço` -> `Concluir` -> `Entrar na conta de serviço` -> `Adicionar chave` -> `JSON`
   - Faça o download do arquivo e coloque na pasta `/config` com o nome `credentials.json`.
+  - O arquivo de credentials deve ter os mesmos campos do arquivo `credentials.example.json`.
   - [Passo a passo](https://drive.google.com/drive/folders/17Xyg-GNeaCgPdQopkS7G0YwDtqcSord-?usp=drive_link)
 
 Em seguida, execute o comando:
@@ -46,6 +50,8 @@ Em seguida, execute o comando:
 ```bash
 python  main.py
 ```
+
+- O navegador será aberto e o script irá preencher as tarefas no sistema de registro de tarefas.
 
 ## Observações Importantes
 - O projeto foi desenvolvido para um cenário específico, onde a planilha de horas é preenchida com o `Data`, `Código da Tarefa` (Obtido no sistema de registro das tarefas), `Horário de inicio da tarefa`, `Hora de término da tarefa`, `Descrição da tarefa`, `Apontado`. Caso a planilha seja diferente, é necessário alterar o código para se adequar ao novo cenário.
@@ -72,10 +78,6 @@ python  main.py
 - **Entre na planilha de horas e clique em `Arquivo` -> `Fazer uma cópia` para copiar a planilha para a sua conta do Google.**
 
 - Caso necessite adicionar mais colunas para as tarefas, clique com o botão direito na ultima linha do dia e clique em `Insira 1 linha acima`, em seguida copie e cole a ultima linha na nova linha criada. Dessa forma a nova linha terá as fórmulas necessárias para o cálculo das horas e apontamentos.
-
-## Licença
-
-Este projeto está sob a licença [MIT](LICENSE).
 
 ---
 
