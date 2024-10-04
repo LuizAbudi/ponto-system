@@ -1,12 +1,14 @@
 from googleapiclient.discovery import build
 
+
 class GoogleSheetsRepository:
     def __init__(self, credentials):
         self.service = build('sheets', 'v4', credentials=credentials)
-        
+
     def get_range_names(self, spreadsheet_id):
-        spreadsheet = self.service.spreadsheets().get(spreadsheetId=spreadsheet_id).execute()
-        
+        spreadsheet = self.service.spreadsheets().get(
+            spreadsheetId=spreadsheet_id).execute()
+
         range_names = []
         for sheet in spreadsheet.get('sheets', []):
             title = sheet.get('properties', {}).get('title', '')

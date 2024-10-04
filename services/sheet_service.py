@@ -1,5 +1,6 @@
-from models.sheet_data import SheetData
 from datetime import datetime, timedelta
+
+from models.sheet_data import SheetData
 
 
 class SheetService:
@@ -72,3 +73,10 @@ class SheetService:
             }
             entries.append(entry)
         return entries
+
+    def get_entries_for_current_month(self, spreadsheet_id, actual_month):
+        rows = self.get_all_rows(spreadsheet_id, actual_month)
+        valid_rows = self.filter_valid_rows(rows)
+        adjusted_rows = self.adjust_times(valid_rows)
+
+        return self.convert_to_entries(adjusted_rows)

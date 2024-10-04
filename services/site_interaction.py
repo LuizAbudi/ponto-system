@@ -1,15 +1,15 @@
-import os
-import time
 import sys
+import time
 
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 class SiteInteraction:
@@ -25,8 +25,14 @@ class SiteInteraction:
             self.driver = webdriver.Chrome(service=Service(
                 ChromeDriverManager().install()), options=chrome_options)
             print("Chrome iniciado com sucesso.")
-        except Exception as e:
+        except WebDriverException as e:
             print(f"Erro ao iniciar o Chrome: {e}")
+            self.driver = None
+        except FileNotFoundError as e:
+            print(f"Arquivo não encontrado: {e}")
+            self.driver = None
+        except Exception as e:
+            print(f"Erro inesperado: {e}")
             self.driver = None
 
         if self.driver is None:
@@ -38,7 +44,7 @@ class SiteInteraction:
             try:
                 self.driver.get(url)
                 time.sleep(2)
-                print(f"Acessando o site: {url}")
+                print(f"Acessando o site: {url}\n")
             except Exception as e:
                 print(f"Erro ao acessar o site {url}: {e}")
         else:
@@ -137,7 +143,7 @@ class SiteInteraction:
 
     def process_entries(self, entries):
         for entry in entries:
-            print(f"Iniciando processamento da entrada: {entry}")
+            print(f"Iniciando processamento da entrada: {entry}\n")
             try:
                 self.select_task(entry['task'])
 
@@ -161,7 +167,7 @@ class SiteInteraction:
                 success_message = self.wait_for_message(
                     "Execução Salva com Sucesso!")
                 if success_message:
-                    print(f"Apontamento realizado:\n")
+                    print("Apontamento realizado:\n")
                     print(f"Tarefa: {entry['task']}\n")
                     print(f"Data e Hora de Início: {entry['dh_inicio']}\n")
                     print(f"Data e Hora de Fim: {entry['dh_fim']}\n")
@@ -181,3 +187,9 @@ class SiteInteraction:
             print("Chrome fechado.")
         else:
             print("Driver não estava disponível. Não foi possível fechar.")
+
+    def execute(self, url, user, password, entries):
+        self.access_site(url)
+        self.login_in_site(url, user, password)
+        self.process_entries(entries)
+        self.close()
