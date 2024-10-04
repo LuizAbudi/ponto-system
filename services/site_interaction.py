@@ -1,3 +1,4 @@
+import os
 import time
 import sys
 
@@ -12,11 +13,9 @@ from selenium.webdriver.common.keys import Keys
 
 
 class SiteInteraction:
-    def __init__(self):
+    def __init__(self, chrome_path):
         chrome_options = Options()
-        # Caminho para o Chrome
-        chrome_options.binary_location = "C:/Program Files/Google/Chrome/Application/chrome.exe"
-        chrome_options.add_argument("--headless")
+        chrome_options.binary_location = chrome_path
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--disable-gpu")
@@ -70,7 +69,6 @@ class SiteInteraction:
                 button = self.driver.find_element(By.CSS_SELECTOR, selector)
                 button.click()
                 time.sleep(2)
-                print(f"Botão clicado: {selector}")
             except Exception as e:
                 print(f"Erro ao clicar no botão: {selector}. {e}")
         else:
@@ -82,12 +80,9 @@ class SiteInteraction:
                 input_field = self.driver.find_element(
                     By.CSS_SELECTOR, input_selector)
                 input_field.click()
-                print(f"Clicado no campo: {input_selector}")
-
                 input_field.send_keys(Keys.CONTROL + 'a')
 
                 input_field.send_keys(Keys.BACKSPACE)
-                print(f"Campo limpo: {input_selector}")
             except Exception as e:
                 print(f"Erro ao limpar o campo: {input_selector}. {e}")
         else:
@@ -99,7 +94,6 @@ class SiteInteraction:
                 input_field = self.driver.find_element(
                     By.CSS_SELECTOR, input_selector)
                 input_field.send_keys(text)
-                print(f"Texto inserido no campo {input_selector}: {text}")
             except Exception as e:
                 print(f"Erro ao inserir texto no campo: {input_selector}. {e}")
         else:
@@ -136,9 +130,6 @@ class SiteInteraction:
                     By.XPATH, ".//button[@data-toggle='modal'][@data-target='#modalExecucoes']")
 
                 button.click()
-
-                print(f"Tarefa selecionada: {task}")
-                print("Botão de execuções clicado.")
             except Exception as e:
                 print(f"Erro ao selecionar a tarefa: {task}. {e}")
         else:
@@ -152,7 +143,6 @@ class SiteInteraction:
 
                 self.click_button(
                     "button[ng-click='incluirExecucao(ordemServicoEdicao)']")
-                print("Botão de incluir execução clicado.")
 
                 self.clear_input("#dhinicio")
                 self.enter_text("#dhinicio", entry['dh_inicio'])
@@ -164,15 +154,18 @@ class SiteInteraction:
 
                 self.click_button(
                     "button[ng-click='salvarExecucao(ordemServicoEdicao)']")
-                print("Execução salva.")
 
                 self.click_button(
                     "button[ng-click='fecharExecucao(execucao)']")
-                print("Execução fechada.")
 
                 success_message = self.wait_for_message(
                     "Execução Salva com Sucesso!")
                 if success_message:
+                    print(f"Apontamento realizado:\n")
+                    print(f"Tarefa: {entry['task']}\n")
+                    print(f"Data e Hora de Início: {entry['dh_inicio']}\n")
+                    print(f"Data e Hora de Fim: {entry['dh_fim']}\n")
+                    print(f"Descrição: {entry['descricao']}\n")
                     print(f"Mensagem de sucesso recebida: {success_message}")
                 else:
                     print("Mensagem de sucesso não encontrada.")
