@@ -6,7 +6,7 @@ class GoogleSheetsRepository:
         self.service = build('sheets', 'v4', credentials=credentials)
 
     def get_range_names(self, spreadsheet_id):
-        spreadsheet = self.service.spreadsheets().get(
+        spreadsheet = self.service.spreadsheets().get(  # pylint: disable=no-member
             spreadsheetId=spreadsheet_id).execute()
 
         range_names = []
@@ -17,6 +17,6 @@ class GoogleSheetsRepository:
         return range_names
 
     def get_sheet_data(self, spreadsheet_id, range_name):
-        sheet = self.service.spreadsheets()
+        sheet = self.service.spreadsheets()  # pylint: disable=no-member
         result = sheet.values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
         return result.get('values', [])
