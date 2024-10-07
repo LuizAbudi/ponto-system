@@ -51,6 +51,8 @@ Em seguida, execute o comando:
 python main.py
 ```
 
+- Selecione o mês de referencia para o apontamento de horas no terminal.
+
 - O navegador será aberto e o script irá preencher as tarefas no sistema de registro de tarefas.
 
 ## Observações Importantes
