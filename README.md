@@ -48,7 +48,7 @@ TASK_PASSWORD="senha_do_sistema_de_tarefas"
 Em seguida, execute o comando:
 
 ```bash
-python  main.py
+python main.py
 ```
 
 - O navegador será aberto e o script irá preencher as tarefas no sistema de registro de tarefas.
@@ -76,6 +76,9 @@ python  main.py
     - hora fim formatada
 
 - **Entre na planilha de horas e clique em `Arquivo` -> `Fazer uma cópia` para copiar a planilha para a sua conta do Google.**
+
+- Com a cópia da planilha criada clique em `Compartilhar` no canto superior direito, coloque como `Qualquer pessoa com o link`, em acessor `Acesso geral` selecione `Leitor`, em seguida copie o id da planilha e cole no arquivo `.env` na variável `GOOGLE_SPREADSHEET_ID`.
+  - Na URL: docs.google.com/spreadsheets/d/`id_da_planilha`/edit#gid=0
 
 - Caso necessite adicionar mais colunas para as tarefas, clique com o botão direito na ultima linha do dia e clique em `Insira 1 linha acima`, em seguida copie e cole a ultima linha na nova linha criada. Dessa forma a nova linha terá as fórmulas necessárias para o cálculo das horas e apontamentos.
 
