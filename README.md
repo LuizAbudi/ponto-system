@@ -1,4 +1,3 @@
-i
 # Automação de Apontamento de Horas com Google Sheets
 
 Este projeto implementa a automação de apontamento de horas. O projeto foi desenvolvido em Python e utiliza de uma integração com o Google Sheets para obter as informações das horas trabalhadas. Foi utilizado o framework `Selenium` para a automação do navegador e a biblioteca `google-api-python-client` para a integração com o Google Sheets.
@@ -45,8 +44,8 @@ Este projeto implementa a automação de apontamento de horas. O projeto foi des
 
   - Caso necessite adicionar mais colunas para as tarefas, clique com o botão direito na última linha do dia e clique em `Insira 1 linha acima`, em seguida copie e cole a última linha na nova linha criada. Dessa forma a nova linha terá as fórmulas necessárias para o cálculo das horas e apontamentos.
 
-### Exemplo de uso da Planilha
-![Imagem](https://ibb.co/Ws9jQsJ)
+### Exemplo da Planilha
+![alt text](exPlanilha.png "Planilha de Horas")
 
 ## Credenciais Google
 
