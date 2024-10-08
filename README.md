@@ -24,6 +24,13 @@ Este projeto implementa a automação de apontamento de horas. O projeto foi des
   - [Google Chrome](https://www.google.com/intl/pt-BR/chrome/)
   - Template Planilha Google
 
+## Clone o repositório
+  - Clone o repositório utilizando o comando:
+  
+  ```bash
+  git clone https://github.com/LuizAbudi/ponto-system.git
+  ```
+
 ## Planilha 
 
   - A planilha deve conter as seguintes colunas:
