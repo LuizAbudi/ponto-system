@@ -46,8 +46,7 @@ Este projeto implementa a automação de apontamento de horas. O projeto foi des
   - Caso necessite adicionar mais colunas para as tarefas, clique com o botão direito na última linha do dia e clique em `Insira 1 linha acima`, em seguida copie e cole a última linha na nova linha criada. Dessa forma a nova linha terá as fórmulas necessárias para o cálculo das horas e apontamentos.
 
 ### Exemplo de uso da Planilha
-<img src="https://ibb.co/Ws9jQsJ
-" alt="Exemplo planilha">
+![Imagem](https://ibb.co/Ws9jQsJ)
 
 ## Credenciais Google
 
