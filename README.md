@@ -19,6 +19,24 @@ Este projeto implementa a automação de apontamento de horas. O projeto foi des
 
 Para executar o projeto, clone o repositório, pelo terminal, entre na pasta do projeto e execute o comando:
 
+```bash
+python -m venv venv
+```
+
+No Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+No macOS/Linux:
+
+```bash
+source venv/bin/activate
+```
+
+Verificar se apareceu (venv) antes do local de trabalho no terminal
+
 ```bash	
 pip install -r requirements.txt
 ```
